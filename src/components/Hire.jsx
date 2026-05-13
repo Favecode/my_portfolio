@@ -18,7 +18,7 @@ export default function Hire({ setPage }) {
           </p>
           <div className="contact-info" style={{ marginTop: "2rem" }}>
             {[
-              { icon: "✆", label: "Phone", val: "09164925583" },
+              { icon: "✆", label: "Phone", val: "2349164925583" },
               { icon: "✉", label: "Email", val: "emmanuelonaolapo11@gmail.com" },
               { icon: "𝕏", label: "X (Twitter)", val: "@myfaveguy" },
             ].map(c => (
@@ -82,8 +82,8 @@ export default function Hire({ setPage }) {
         <h2 className="section-title" style={{ textAlign: "center", fontSize: "2rem" }}>Quick FAQ</h2>
         <div className="grid-2">
           {[
-            { icon: "◎", title: "Project Timelines", body: "Every project is unique. A standard WordPress launch typically takes 2–4 weeks, while complex full-stack applications range from 2–4 months depending on the scope and technical requirements." },
-            { icon: "◎", title: "Pricing & Investment", body: "I provide value-based pricing. WordPress projects generally start at $1,500, while custom web applications begin at $5,000. Each quote is tailored to the specific business impact and technical complexity of your request." },
+            { icon: "◎", title: "Project Timelines", body: "Every project is unique. A standard WordPress launch typically takes 4-7 days, while complex full-stack applications range from 1–2 weeks depending on the scope and technical requirements." },
+            { icon: "◎", title: "Pricing & Investment", body: "I provide value-based pricing. WordPress projects generally start at $-, while custom web applications begin at $-. Each quote is tailored to the specific business impact and technical complexity of your request." },
           ].map(f => (
             <div key={f.title} className="card">
               <div style={{ color: ACCENT, marginBottom: "0.5rem" }}>{f.icon}</div>
