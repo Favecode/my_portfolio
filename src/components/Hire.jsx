@@ -19,7 +19,7 @@ export default function Hire({ setPage }) {
           <div className="contact-info" style={{ marginTop: "2rem" }}>
             {[
               { icon: "✆", label: "Phone", val: "2349164925583" },
-              { icon: "✉", label: "Email", val: "emmanuelonaolapo11@gmail.com" },
+              { icon: "✉", label: "Email", val: "favouronaolapo945@gmail.com" },
               { icon: "𝕏", label: "X (Twitter)", val: "@myfaveguy" },
             ].map(c => (
               <div key={c.label} className="contact-item">
