@@ -199,3 +199,61 @@ button {
   from {transform: scale(0.9);}
   to {transform: scale(1);}
 }
+
+.image-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.thumb {
+  width: 90px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 0.3s ease, opacity 0.3s;
+}
+
+.thumb:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+/* 🔥 MODAL */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-image {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  animation: zoomIn 0.3s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.85) }
+  to { transform: scale(1) }
+}
