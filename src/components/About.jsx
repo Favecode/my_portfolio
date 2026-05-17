@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa6";
 
 export default function About({ setPage }) {
   return (
@@ -174,8 +175,8 @@ export default function About({ setPage }) {
         </p>
 
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
-          <a href="https://github.com" target="_blank" rel="noreferrer">
-            <FaGithub size={20} />
+          <a href="https://wa.me/2349164925583" target="_blank" rel="noreferrer">
+            <FaWhatsapp size={20} />
           </a>
           <a href="https://linkedin.com" target="_blank" rel="noreferrer">
             <FaLinkedin size={20} />

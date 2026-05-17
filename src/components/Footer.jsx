@@ -9,10 +9,10 @@ export default function Footer({ setPage }) {
         </div>
         <div className="footer-col">
           <h4>Connect</h4>
-          <a href="#">Github</a>
+          <a href="https://wa.me/2349164925583">Whatsapp</a>
           <a href="#">LinkedIn</a>
           <a href="https://x.com/myfaveguy">Twitter</a>
-          <a href="mailto:favouronaolapo945@gmail.com">Email</a>
+          <a href="mailto:faveecodes5@gmail.com">Email</a>
         </div>
         <div className="footer-col">
           <h4>Navigation</h4>
