@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import Footer from "./Footer";
-import { ACCENT, MUTED } from "../constants";
-import { supabase } from "../supabaseClient";
+import { MUTED } from "../constants";
+
+// ─── Replace these with your real EmailJS credentials ───────────────────────
+const SERVICE_ID  = "service_81owciq";   // e.g. "service_abc123"
+const TEMPLATE_ID = "template_hyx525o"; // e.g. "template_xyz789"
+const PUBLIC_KEY  = "YOUR_PUBLIC_KEY";  // e.g. "aBcDeFgHiJkLmNoPq"
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function Hire({ setPage }) {
+  const formRef = useRef(null);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
     projectType: "Full-stack Web Application",
-    message: ""
+    message: "",
   });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,37 +27,54 @@ export default function Hire({ setPage }) {
       alert("Please fill all required fields");
       return;
     }
+
     setLoading(true);
-    const { error } = await supabase.from("contacts").insert([{
-      name: form.name,
-      email: form.email,
-      project_type: form.projectType,
-      message: form.message
-    }]);
-    setLoading(false);
-    if (error) { console.error(error); alert("Something went wrong. Try again."); return; }
-    setSent(true);
-    setForm({ name: "", email: "", projectType: "Full-stack Web Application", message: "" });
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name:    form.name,
+          from_email:   form.email,
+          project_type: form.projectType,
+          message:      form.message,
+          to_name:      "Favour",
+        },
+        PUBLIC_KEY
+      );
+
+      setSent(true);
+      setForm({ name: "", email: "", projectType: "Full-stack Web Application", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="page fade-in">
       <div className="contact-layout">
+
+        {/* LEFT — info */}
         <div>
           <div className="eyebrow">Contact</div>
           <h1 className="hero-title">
             Let's build something <span>great together.</span>
           </h1>
           <p className="hero-sub" style={{ marginTop: "1rem" }}>
-            Ready to elevate your digital presence? Whether it's a complex full-stack application
-            or a high-performance WordPress site, I'm here to engineer your success.
+            Ready to elevate your digital presence? Whether it's a complex
+            full-stack application or a high-performance WordPress site, I'm
+            here to engineer your success.
           </p>
 
           <div className="contact-info" style={{ marginTop: "2rem" }}>
             {[
-              { icon: "✆", label: "Phone",      val: "+234 916 492 5583" },
-              { icon: "✉", label: "Email",      val: "faveecodes5@gmail.com" },
-              { icon: "𝕏", label: "X (Twitter)", val: "@myfaveguy" }
+              { icon: "✆", label: "Phone",       val: "+234 916 492 5583" },
+              { icon: "✉", label: "Email",       val: "faveecodes5@gmail.com" },
+              { icon: "𝕏", label: "X (Twitter)", val: "@myfaveguy" },
             ].map((c) => (
               <div key={c.label} className="contact-item">
                 <div className="contact-icon">{c.icon}</div>
@@ -63,12 +87,15 @@ export default function Hire({ setPage }) {
           </div>
         </div>
 
+        {/* RIGHT — form */}
         <div className="card" style={{ padding: "2rem" }}>
           {sent ? (
             <div style={{ textAlign: "center", padding: "3rem 0" }}>
               <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>✦</div>
               <h3 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>Message Sent!</h3>
-              <p style={{ color: MUTED, fontSize: "0.85rem" }}>I'll get back to you within 24 hours.</p>
+              <p style={{ color: MUTED, fontSize: "0.85rem" }}>
+                I'll get back to you within 24 hours.
+              </p>
               <button
                 onClick={() => setSent(false)}
                 className="btn-ghost"
@@ -82,17 +109,34 @@ export default function Hire({ setPage }) {
               <div className="form-row">
                 <div className="form-group">
                   <label className="form-label">Name</label>
-                  <input className="form-input" name="name" value={form.name} onChange={handleChange} placeholder="John Doe" />
+                  <input
+                    className="form-input"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="John Doe"
+                  />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Email</label>
-                  <input className="form-input" name="email" value={form.email} onChange={handleChange} placeholder="john@example.com" />
+                  <input
+                    className="form-input"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="john@example.com"
+                  />
                 </div>
               </div>
 
               <div className="form-group">
                 <label className="form-label">Project Type</label>
-                <select className="form-select" name="projectType" value={form.projectType} onChange={handleChange}>
+                <select
+                  className="form-select"
+                  name="projectType"
+                  value={form.projectType}
+                  onChange={handleChange}
+                >
                   <option>Full-stack Web Application</option>
                   <option>WordPress Site</option>
                   <option>E-commerce Platform</option>
