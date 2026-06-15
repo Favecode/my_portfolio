@@ -59,10 +59,10 @@ export default function Home({ setPage }) {
       {/* ── HERO ── */}
       <div className="home-hero">
         <div className="home-hero-text">
-          <div className="eyebrow">Full-Stack &amp; WordPress Engineer · Lagos, Nigeria</div>
+          <div className="eyebrow">Full-Stack &amp; WordPress Engineer ·</div>
 
           <h1 className="hero-title">
-            Hi, I'm <span>Onaolapo<br />Favour Emmanuel.</span>
+            Hi, I'm <span> Favor Emmanuel<br />Onaolapo.</span>
           </h1>
 
           <p className="hero-sub">
