@@ -1,4 +1,4 @@
-export const NAV_LINKS = ["Portfolio", "Services", "Stack", "About"];
+export const NAV_LINKS = ["Home", "About", "Portfolio", "Services", "Stack"];
 
 export const ACCENT = "#00e5b0";
 export const ACCENT2 = "#00c49a";
@@ -11,64 +11,46 @@ export const MUTED = "#7a9990";
 
 
 /* ✅ LOCAL IMAGES */
-import screen from "./assets/screen.png";
-import screen2 from "./assets/screen2.png";
-import screen3 from "./assets/screen3.png";
-
-import a from "./assets/a.png";
-import b from "./assets/b.png";
-import c from "./assets/c.png";
-import d from "./assets/d.png";
-import { FaArrowUp19 } from "react-icons/fa6";
-
-import a1 from "./assets/a1.png";
-import a2 from "./assets/a2.png";
-import a3 from "./assets/a3.png";
-import a4 from "./assets/a4.png";
-import a5 from "./assets/a5.png";
-
-import q1 from "./assets/q1.png";
-import q2 from "./assets/q2.png";
-import q3 from "./assets/q3.png";
-import q4 from "./assets/q4.png";
-import q5 from "./assets/q5.png";
+import project1 from "./assets/project1.png";
+import project2 from "./assets/project2.png";
+import project3 from "./assets/project3.png";
+import project4 from "./assets/project4.png";
 
 export const projects = [
   {
     id: 1,
     type: "Full Stack",
-    title: "E-commerce Platform",
-    desc: "Headless commerce engine built with Next.js and Stripe API integration.",
+    title: "Savoria Foods",
+    desc: "A modern food ordering platform built with a clean, appetising user experience.",
     filter: "full-stack",
-    images: [screen, screen2, screen3]
+    image: project1,
+    link: "https://savoriafoods.netlify.app/",
   },
-
   {
     id: 2,
-    type: "SaaS Dashboard",
-    title: "CloudMetrics Pro",
-    desc: "Real-time enterprise monitoring tool with AWS Lambda backend.",
+    type: "Full Stack",
+    title: "Barbershop Website",
+    desc: "Premium barbershop brand site with a dark luxury aesthetic and service showcase.",
     filter: "full-stack",
-    images: [ a, b, c, d]
+    image: project2,
+    link: "https://barbarshop-website.vercel.app/",
   },
-
   {
     id: 3,
-    type: "WordPress",
-    title: "Custom WP Theme",
-    desc: "Luxury brand Gutenberg-driven theme with performance optimisation.",
-    filter: "wordpress",
-    images: [ a1, a2, a3, a4, a5]
+    type: "Full Stack",
+    title: "Glow's Haven",
+    desc: "Beauty and wellness brand site with an elegant, minimal product-focused layout.",
+    filter: "full-stack",
+    image: project3,
+    link: "https://glowshaven.netlify.app/",
   },
-
   {
     id: 4,
-    type: "WordPress",
-    title: "News Portal",
-    desc: "High-traffic editorial platform with advanced search system.",
-    filter: "wordpress",
-    images: [ q1, q2, q3, q4, q5 ]
+    type: "E-commerce",
+    title: "ShopWithX",
+    desc: "A clean e-commerce storefront with intuitive product browsing and checkout flow.",
+    filter: "full-stack",
+    image: project4,
+    link: "https://shopwithx.netlify.app/",
   },
-
-
 ];

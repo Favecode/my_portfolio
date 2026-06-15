@@ -6,8 +6,6 @@ import { supabase } from "../supabaseClient";
 export default function Hire({ setPage }) {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // FORM STATE
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -15,49 +13,24 @@ export default function Hire({ setPage }) {
     message: ""
   });
 
-  // HANDLE INPUT CHANGE
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // SUBMIT TO SUPABASE
-  const handleSubmit = async (e) => {
-    if (e) e.preventDefault();
-
-    // basic validation (optional but good)
+  const handleSubmit = async () => {
     if (!form.name || !form.email || !form.message) {
       alert("Please fill all required fields");
       return;
     }
-
     setLoading(true);
-
-    const { error } = await supabase.from("contacts").insert([
-      {
-        name: form.name,
-        email: form.email,
-        project_type: form.projectType,
-        message: form.message
-      }
-    ]);
-
+    const { error } = await supabase.from("contacts").insert([{
+      name: form.name,
+      email: form.email,
+      project_type: form.projectType,
+      message: form.message
+    }]);
     setLoading(false);
-
-    if (error) {
-      console.error(error);
-      alert("Something went wrong. Try again.");
-      return;
-    }
-
+    if (error) { console.error(error); alert("Something went wrong. Try again."); return; }
     setSent(true);
-
-    // reset form after success
-    setForm({
-      name: "",
-      email: "",
-      projectType: "Full-stack Web Application",
-      message: ""
-    });
+    setForm({ name: "", email: "", projectType: "Full-stack Web Application", message: "" });
   };
 
   return (
@@ -65,23 +38,18 @@ export default function Hire({ setPage }) {
       <div className="contact-layout">
         <div>
           <div className="eyebrow">Contact</div>
-
-          <h1
-            className="hero-title"
-            style={{ fontSize: "clamp(2rem,5vw,3rem)" }}
-          >
+          <h1 className="hero-title">
             Let's build something <span>great together.</span>
           </h1>
-
-          <p className="hero-sub">
+          <p className="hero-sub" style={{ marginTop: "1rem" }}>
             Ready to elevate your digital presence? Whether it's a complex full-stack application
-            or a high-performance WordPress site, I'm here to help you engineer success.
+            or a high-performance WordPress site, I'm here to engineer your success.
           </p>
 
           <div className="contact-info" style={{ marginTop: "2rem" }}>
             {[
-              { icon: "✆", label: "Phone", val: "2349164925583" },
-              { icon: "✉", label: "Email", val: "faveecodes5@gmail.com" },
+              { icon: "✆", label: "Phone",      val: "+234 916 492 5583" },
+              { icon: "✉", label: "Email",      val: "faveecodes5@gmail.com" },
               { icon: "𝕏", label: "X (Twitter)", val: "@myfaveguy" }
             ].map((c) => (
               <div key={c.label} className="contact-item">
@@ -99,20 +67,12 @@ export default function Hire({ setPage }) {
           {sent ? (
             <div style={{ textAlign: "center", padding: "3rem 0" }}>
               <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>✦</div>
-              <h3 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>
-                Message Sent!
-              </h3>
-              <p style={{ color: MUTED, fontSize: "0.85rem" }}>
-                I'll get back to you within 24 hours.
-              </p>
-
+              <h3 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>Message Sent!</h3>
+              <p style={{ color: MUTED, fontSize: "0.85rem" }}>I'll get back to you within 24 hours.</p>
               <button
                 onClick={() => setSent(false)}
-                style={{
-                  marginTop: "1rem",
-                  padding: "10px 16px",
-                  cursor: "pointer"
-                }}
+                className="btn-ghost"
+                style={{ marginTop: "1rem" }}
               >
                 Send another message
               </button>
@@ -122,35 +82,17 @@ export default function Hire({ setPage }) {
               <div className="form-row">
                 <div className="form-group">
                   <label className="form-label">Name</label>
-                  <input
-                    className="form-input"
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="John Doe"
-                  />
+                  <input className="form-input" name="name" value={form.name} onChange={handleChange} placeholder="John Doe" />
                 </div>
-
                 <div className="form-group">
                   <label className="form-label">Email</label>
-                  <input
-                    className="form-input"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="john@example.com"
-                  />
+                  <input className="form-input" name="email" value={form.email} onChange={handleChange} placeholder="john@example.com" />
                 </div>
               </div>
 
               <div className="form-group">
                 <label className="form-label">Project Type</label>
-                <select
-                  className="form-select"
-                  name="projectType"
-                  value={form.projectType}
-                  onChange={handleChange}
-                >
+                <select className="form-select" name="projectType" value={form.projectType} onChange={handleChange}>
                   <option>Full-stack Web Application</option>
                   <option>WordPress Site</option>
                   <option>E-commerce Platform</option>
