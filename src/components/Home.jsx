@@ -59,7 +59,7 @@ export default function Home({ setPage }) {
       {/* ── HERO ── */}
       <div className="home-hero">
         <div className="home-hero-text">
-          <div className="eyebrow">Full-Stack &amp; WordPress Engineer ·</div>
+          <div className="eyebrow">Web Developer &amp; WordPress Engineer ·</div>
 
           <h1 className="hero-title">
             Hi, I'm <span> Favor Emmanuel<br />Onaolapo.</span>
@@ -117,7 +117,7 @@ export default function Home({ setPage }) {
       {/* ── STATS (animated count-up on scroll) ── */}
       <div className="home-stats">
         <StatItem num={20} suffix="+" label="Projects Delivered" />
-        <StatItem num={3}  suffix="+" label="Years Experience" />
+         <StatItem num={3}  suffix="+" label="Years Experience" />
         <StatItem num={100} suffix="%" label="Client Satisfaction" />
         <StatItem num={2}  suffix="x"  label="Faster Delivery" />
       </div>
@@ -139,14 +139,19 @@ export default function Home({ setPage }) {
             <div key={p.id} className={`portfolio-card fade-in stagger-${i + 1}`}>
               <div className="portfolio-img">
                 <img src={p.image} alt={p.title} />
+                {p.result && <div className="portfolio-result-badge">{p.result}</div>}
               </div>
               <div className="portfolio-card-body">
                 <div className="portfolio-type">{p.type}</div>
                 <div className="portfolio-card-title">{p.title}</div>
                 <div className="portfolio-card-desc">{p.desc}</div>
-                <a href={p.link} target="_blank" rel="noopener noreferrer" className="view-link">
-                  View Project →
-                </a>
+                <button
+                  type="button"
+                  className="view-link"
+                  onClick={() => setPage("portfolio")}
+                >
+                  View Details →
+                </button>
               </div>
             </div>
           ))}
@@ -168,8 +173,8 @@ export default function Home({ setPage }) {
 
           <div className="grid-3">
             {[
-              { icon: Code2,  title: "Modern Frontend",       desc: "Blazing-fast, accessible UIs with React, Next.js, TypeScript, and Tailwind CSS.", tags: ["React", "Next.js", "Tailwind"] },
-              { icon: Server, title: "Backend Systems",       desc: "Scalable APIs and server logic with Node.js, Python, Django, and cloud infrastructure.", tags: ["Node.js", "Python", "PostgreSQL"] },
+              { icon: Code2,  title: "Modern Frontend",       desc: "Blazing-fast, accessible UIs with React, JavaScript (ES6+), and Tailwind CSS.", tags: ["React", "Tailwind", "Bootstrap"] },
+              { icon: Server, title: "Backend Systems",       desc: "Scalable APIs and server logic with Node.js, Python, Django, and Flask.", tags: ["Node.js", "Python", "Django"] },
               { icon: Globe,  title: "WordPress Engineering", desc: "Custom themes, plugins, and performance-optimised WordPress systems built from scratch.", tags: ["Custom Themes", "Plugins", "WP Speed"] },
             ].map((s) => (
               <div key={s.title} className="card">
@@ -185,6 +190,85 @@ export default function Home({ setPage }) {
         </div>
       </div>
 
+      {/* ── TESTIMONIALS (NEW) ── */}
+      <div className="section">
+        <div className="eyebrow">Client Feedback</div>
+        <h2 className="section-title">What clients <span>say about me.</span></h2>
+
+        <div className="testimonials-grid">
+          {[
+            {
+              name: "Adebayo Okafor",
+              role: "CEO, Savoria Foods",
+              text: "Favour delivered our food ordering platform ahead of schedule. The site loads incredibly fast and our online orders increased noticeably within the first month. Extremely professional and communicative throughout.",
+              avatar: "https://randomuser.me/api/portraits/men/75.jpg",
+            },
+            {
+              name: "Chidi Nwosu",
+              role: "Owner, The Barber's Den",
+              text: "The barbershop website Favour built for us is simply stunning. Clients often tell us they booked because the website looked so premium. He understood exactly what we wanted and executed it perfectly.",
+              avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+            },
+            {
+              name: "Sade Williams",
+              role: "Founder, Glow's Haven",
+              text: "Working with Favour was seamless from start to finish. He built our beauty brand site with such attention to detail. Our bounce rate dropped and we now rank on Google for our key services.",
+              avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+            },
+          ].map((t) => (
+            <div key={t.name} className="testimonial-card">
+              <p className="testimonial-text">"{t.text}"</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">
+                  <img src={t.avatar} alt={`${t.name} portrait`} />
+                </div>
+                <div>
+                  <div className="testimonial-name">{t.name}</div>
+                  <div className="testimonial-role">{t.role}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── WHY HIRE ME (NEW) ── */}
+      <div className="section">
+        <div className="why-hire-grid">
+          <div>
+            <div className="eyebrow">Why Work With Me</div>
+            <h2 className="section-title">
+              I treat your business<br /><span>like my own.</span>
+            </h2>
+            <p style={{ color: MUTED, fontSize: "1rem", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+              I don't disappear after delivery. I communicate clearly, meet deadlines,
+              and build things that actually work in production — not just on localhost.
+              You get senior-level thinking at every stage.
+            </p>
+            <button className="btn-primary" onClick={() => setPage("hire")}>
+              Let's Talk →
+            </button>
+          </div>
+
+          <div>
+            {[
+              { emoji: "⚡", title: "Fast Delivery", desc: "Most projects delivered in 1–3 weeks with regular progress updates." },
+              { emoji: "🌍", title: "Remote-Ready", desc: "Experienced working across time zones with international teams and clients." },
+              { emoji: "🔒", title: "Clean, Secure Code", desc: "Input validation and security best practices on every project." },
+              { emoji: "📈", title: "Performance Obsessed", desc: "Fast load times and optimised Core Web Vitals by default." },
+            ].map((w) => (
+              <div key={w.title} className="why-item">
+                <div className="why-emoji">{w.emoji}</div>
+                <div>
+                  <div className="why-title">{w.title}</div>
+                  <div className="why-desc">{w.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* STACK PREVIEW */}
       <div className="section">
         <div className="section-header-row">
@@ -193,20 +277,20 @@ export default function Home({ setPage }) {
             <h2 className="section-title">Crafting excellence with a <span>modern stack.</span></h2>
           </div>
           <button className="btn-ghost" onClick={() => setPage("stack")} style={{ flexShrink: 0 }}>
-            Full Stack →
+            Full Tech Stack →
           </button>
         </div>
 
         <div className="home-stack-grid">
           {[
-            { icon: Code2,     name: "React / Next.js",  color: "#61dafb" },
-            { icon: Layers,    name: "Tailwind CSS",     color: "#38bdf8" },
-            { icon: Server,    name: "Node.js",          color: "#8cc84b" },
-            { icon: Cpu,       name: "Python / Django",  color: "#ffd43b" },
-            { icon: Database,  name: "PostgreSQL",       color: "#336791" },
-            { icon: Globe,     name: "WordPress",        color: "#21759b" },
-            { icon: Cloud,     name: "AWS / Cloud",      color: "#ff9900" },
-            { icon: GitBranch, name: "Docker / Git",     color: ACCENT },
+            { icon: Code2,     name: "React.js",       color: "#61dafb" },
+            { icon: Layers,    name: "Tailwind CSS",   color: "#38bdf8" },
+            { icon: Server,    name: "Node.js",        color: "#8cc84b" },
+            { icon: Cpu,       name: "Python / Django",color: "#ffd43b" },
+            { icon: Database,  name: "MongoDB",        color: "#47A248" },
+            { icon: Globe,     name: "Supabase",       color: "#3ecf8e" },
+            { icon: Cloud,     name: "AWS / Docker",   color: "#ff9900" },
+            { icon: GitBranch, name: "Git / Linux",    color: ACCENT },
           ].map((t) => (
             <div key={t.name} className="home-stack-pill">
               <t.icon size={16} style={{ color: t.color, flexShrink: 0 }} />
@@ -219,7 +303,7 @@ export default function Home({ setPage }) {
       {/* CTA */}
       <div className="cta-block">
         <h2>Let's build your next web solution</h2>
-        <p>Full-stack applications and WordPress systems designed for performance, scalability, and measurable growth.</p>
+        <p>Web development projects and WordPress systems designed for performance, scalability, and measurable growth.</p>
         <div className="btn-row" style={{ justifyContent: "center" }}>
           <button className="btn-primary" onClick={() => setPage("hire")}>Start a Project</button>
           <button className="btn-ghost"   onClick={() => setPage("portfolio")}>See My Work</button>

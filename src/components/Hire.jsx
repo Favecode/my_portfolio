@@ -1,7 +1,49 @@
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Footer from "./Footer";
-import { MUTED } from "../constants";
+import { MUTED, ACCENT } from "../constants";
+import { ChevronDown, ChevronUp } from "lucide-react";
+
+/* ── FAQ Accordion item (NEW) ── */
+function FAQItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={`faq-item${open ? " open" : ""}`} onClick={() => setOpen(!open)}>
+      <div className="faq-question">
+        <span>{q}</span>
+        {open ? <ChevronUp size={18} color={ACCENT} /> : <ChevronDown size={18} />}
+      </div>
+      {open && <div className="faq-answer">{a}</div>}
+    </div>
+  );
+}
+
+const FAQS = [
+  {
+    q: "How long does a typical project take?",
+    a: "Most landing pages and small sites are delivered in 5–7 days. Larger web development projects typically take 2–4 weeks depending on complexity. I'll give you a clear timeline before we start.",
+  },
+  {
+    q: "Do you work with international clients?",
+    a: "Yes — I work with clients across Nigeria, the UK, the US, Canada, and beyond. I'm comfortable with remote collaboration across time zones.",
+  },
+  {
+    q: "What do you need from me to get started?",
+    a: "A brief description of your project, your goals, and your timeline. Design mockups help but aren't required — I can guide you through the process from scratch.",
+  },
+  {
+    q: "How do payments work?",
+    a: "I typically work with a deposit upfront and the balance on completion. For larger projects I break it into milestones. I accept bank transfer, PayPal, and Wise for international clients.",
+  },
+  {
+    q: "Do you offer post-launch support?",
+    a: "Yes. Every project includes free post-launch support for bug fixes. After that, I offer monthly retainer packages for ongoing maintenance and new features.",
+  },
+  {
+    q: "Can you work with my existing codebase?",
+    a: "Absolutely. I'm comfortable jumping into existing React, Node.js, Django/Flask, and WordPress projects. I'll review the codebase first and give you an honest assessment.",
+  },
+];
 
 // ─── EmailJS Credentials (USE YOUR REAL PUBLIC KEY) ────────────────
 const SERVICE_ID  = "service_81owciq";
@@ -17,7 +59,7 @@ export default function Hire({ setPage }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    projectType: "Full-stack Web Application",
+    projectType: "Web Development Project",
     message: "",
   });
 
@@ -50,7 +92,7 @@ export default function Hire({ setPage }) {
       setForm({
         name: "",
         email: "",
-        projectType: "Full-stack Web Application",
+        projectType: "Web Development Project",
         message: "",
       });
     } catch (err) {
@@ -76,8 +118,8 @@ export default function Hire({ setPage }) {
           </h1>
 
           <p className="hero-sub" style={{ marginTop: "1rem" }}>
-            Ready to elevate your digital presence? Whether it's a complex
-            full-stack application or a high-performance WordPress site,
+            Ready to elevate your digital presence? Whether it's a custom
+            web application or a high-performance WordPress site,
             I'm here to engineer your success.
           </p>
 
@@ -93,6 +135,32 @@ export default function Hire({ setPage }) {
                   <div className="contact-label">{c.label}</div>
                   <div className="contact-val">{c.val}</div>
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* AVAILABILITY (NEW) */}
+          <div className="availability-card">
+            <div className="availability-dot" />
+            <div>
+              <div className="availability-title">Currently Available</div>
+              <div className="availability-desc">
+                Open to freelance projects, remote roles, and agency collaborations.
+                Typical response time: under 24 hours.
+              </div>
+            </div>
+          </div>
+
+          {/* QUICK FACTS (NEW) */}
+          <div style={{ marginTop: "1.5rem" }}>
+            {[
+              { label: "Location", val: "Osun State, Nigeria · Remote Worldwide" },
+              { label: "Languages", val: "English (Fluent)" },
+              { label: "Timezone", val: "WAT (UTC+1) · Flexible" },
+            ].map((f) => (
+              <div key={f.label} className="quick-fact">
+                <span className="quick-fact-label">{f.label}</span>
+                <span className="quick-fact-val">{f.val}</span>
               </div>
             ))}
           </div>
@@ -150,10 +218,10 @@ export default function Hire({ setPage }) {
                   value={form.projectType}
                   onChange={handleChange}
                 >
-                  <option>Full-stack Web Application</option>
+                  <option>Web Development Project</option>
                   <option>WordPress Site</option>
                   <option>E-commerce Platform</option>
-                  <option>SaaS Dashboard</option>
+                  <option>Dashboard / Web App</option>
                   <option>Other</option>
                 </select>
               </div>
@@ -179,6 +247,21 @@ export default function Hire({ setPage }) {
               </button>
             </>
           )}
+        </div>
+      </div>
+
+      {/* FAQ (NEW) */}
+      <div className="section">
+        <div className="eyebrow">FAQ</div>
+        <h2 className="section-title">Questions clients <span>always ask.</span></h2>
+        <p style={{ color: MUTED, fontSize: "0.95rem", lineHeight: 1.7, marginBottom: "2rem", maxWidth: 560 }}>
+          Answers to the most common questions before we work together.
+          Don't see yours? Just send me a message.
+        </p>
+        <div className="faq-list">
+          {FAQS.map((faq) => (
+            <FAQItem key={faq.q} q={faq.q} a={faq.a} />
+          ))}
         </div>
       </div>
 
