@@ -930,7 +930,17 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
 }
 .why-item:last-child { margin-bottom: 0; }
 .why-item:hover { border-color: rgba(0,229,176,0.25); }
-.why-emoji { font-size: 1.3rem; flex-shrink: 0; }
+.why-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(0, 229, 176, 0.08); /* swap to match your ACCENT color */
+  color: var(--accent, #00e5b0);
+  flex-shrink: 0;
+}
 .why-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.2rem; }
 .why-desc  { font-size: 0.82rem; color: #7a9990; line-height: 1.6; }
 

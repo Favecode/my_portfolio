@@ -4,16 +4,15 @@ import Footer from "./Footer";
 import { MUTED, ACCENT } from "../constants";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-/* ── FAQ Accordion item (NEW) ── */
-function FAQItem({ q, a }) {
-  const [open, setOpen] = useState(false);
+/* ── FAQ Accordion item (controlled by parent so only one stays open) ── */
+function FAQItem({ q, a, isOpen, onToggle }) {
   return (
-    <div className={`faq-item${open ? " open" : ""}`} onClick={() => setOpen(!open)}>
+    <div className={`faq-item${isOpen ? " open" : ""}`} onClick={onToggle}>
       <div className="faq-question">
         <span>{q}</span>
-        {open ? <ChevronUp size={18} color={ACCENT} /> : <ChevronDown size={18} />}
+        {isOpen ? <ChevronUp size={18} color={ACCENT} /> : <ChevronDown size={18} />}
       </div>
-      {open && <div className="faq-answer">{a}</div>}
+      {isOpen && <div className="faq-answer">{a}</div>}
     </div>
   );
 }
@@ -55,6 +54,7 @@ export default function Hire({ setPage }) {
   const formRef = useRef(null);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [openFAQ, setOpenFAQ] = useState(null); // tracks index of the currently open FAQ
 
   const [form, setForm] = useState({
     name: "",
@@ -139,7 +139,7 @@ export default function Hire({ setPage }) {
             ))}
           </div>
 
-          {/* AVAILABILITY (NEW) */}
+          {/* AVAILABILITY */}
           <div className="availability-card">
             <div className="availability-dot" />
             <div>
@@ -151,7 +151,7 @@ export default function Hire({ setPage }) {
             </div>
           </div>
 
-          {/* QUICK FACTS (NEW) */}
+          {/* QUICK FACTS */}
           <div style={{ marginTop: "1.5rem" }}>
             {[
               { label: "Location", val: "Osun State, Nigeria · Remote Worldwide" },
@@ -250,7 +250,7 @@ export default function Hire({ setPage }) {
         </div>
       </div>
 
-      {/* FAQ (NEW) */}
+      {/* FAQ */}
       <div className="section">
         <div className="eyebrow">FAQ</div>
         <h2 className="section-title">Questions clients <span>always ask.</span></h2>
@@ -259,8 +259,14 @@ export default function Hire({ setPage }) {
           Don't see yours? Just send me a message.
         </p>
         <div className="faq-list">
-          {FAQS.map((faq) => (
-            <FAQItem key={faq.q} q={faq.q} a={faq.a} />
+          {FAQS.map((faq, i) => (
+            <FAQItem
+              key={faq.q}
+              q={faq.q}
+              a={faq.a}
+              isOpen={openFAQ === i}
+              onToggle={() => setOpenFAQ(openFAQ === i ? null : i)}
+            />
           ))}
         </div>
       </div>
