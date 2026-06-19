@@ -194,7 +194,7 @@ export default function Home({ setPage }) {
             },
             {
               icon: Globe,
-              title: "WordPress Engineering",
+              title: "WordPress Solutions",
               desc: "Custom themes, plugins, and performance-optimised WordPress systems built from scratch.",
               tags: ["Custom Themes", "Plugins", "WP Speed"],
             },
