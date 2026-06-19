@@ -59,14 +59,14 @@ export default function Home({ setPage }) {
       {/* ── HERO ── */}
       <div className="home-hero">
         <div className="home-hero-text">
-          <div className="eyebrow">Web Developer &amp; WordPress Engineer ·</div>
+          <div className="eyebrow">WEB DEVELOPER &amp; DESIGNER · NIGERIA</div>
 
           <h1 className="hero-title">
-            Hi, I'm <span> Favor Emmanuel<br />Onaolapo.</span>
+            Hi, I'm <span> Favor Emmanuel Onaolapo.</span>
           </h1>
-
+            <br />
           <p className="hero-sub">
-            I engineer high-performance web experiences — from pixel-perfect React frontends
+            I engineer high-performance web experiences from pixel-perfect frontend interfaces
             to scalable backend systems and custom WordPress architectures. I don't just write
             code; I build digital products that drive real business results.
           </p>

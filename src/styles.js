@@ -32,7 +32,7 @@ h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; font-weight: 800; }
 h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.3; font-weight: 700; }
 p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
 
-.hero-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.2; }
+.hero-title { font-size: clamp(1.5rem, 5vw, 3rem); font-weight: 800; line-height: 1.2; }
 .hero-title span { color: #00e5b0; }
 
 .hero-sub {
