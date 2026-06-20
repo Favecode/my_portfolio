@@ -15,18 +15,20 @@ import project1 from "./assets/project1.png";
 import project2 from "./assets/project2.png";
 import project3 from "./assets/project3.png";
 import project4 from "./assets/project4.png";
+import project5 from "./assets/project5.png";
 
 export const projects = [
-  {
+   {
     id: 1,
-    type: "Web Development",
-    title: "Savoria Foods",
-    desc: "A modern food ordering platform built with a clean, appetising user experience.",
-    result: "⚡ Fast Load Time",
+    type: "E-commerce",
+    title: "ShopWithX",
+    desc: "A clean e-commerce storefront with intuitive product browsing and checkout flow.",
+    result: "🛒 Optimised Checkout",
     filter: "web-development",
-    image: project1,
-    link: "https://savoriafoods.netlify.app/",
+    image: project5,
+    link: "https://nova-ecommerce-coral.vercel.app/",
   },
+
   {
     id: 2,
     type: "Web Development",
@@ -47,14 +49,14 @@ export const projects = [
     image: project3,
     link: "https://glowshaven.netlify.app/",
   },
-  {
+   {
     id: 4,
-    type: "E-commerce",
-    title: "ShopWithX",
-    desc: "A clean e-commerce storefront with intuitive product browsing and checkout flow.",
-    result: "🛒 Optimised Checkout",
+    type: "Web Development",
+    title: "Savoria Foods",
+    desc: "A modern food ordering platform built with a clean, appetising user experience.",
+    result: "⚡ Fast Load Time",
     filter: "web-development",
-    image: project4,
-    link: "https://shopwithx.netlify.app/",
+    image: project1,
+    link: "https://savoriafoods.netlify.app/",
   },
 ];

@@ -71,6 +71,9 @@ p {
   line-height: 1.8;
   color: #cfe2dc;
 }
+.home-hero {
+  min-height: 100vh;
+}
 
 /* =========================
    SECTIONS

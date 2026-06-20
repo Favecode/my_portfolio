@@ -1,5 +1,15 @@
 const globalCSS = `
 /* =========================
+   ROOT VARIABLES
+   ========================= */
+:root {
+  /* Single source of truth for the sticky nav's height.
+     Used by .home-fold below to calculate exactly how much
+     viewport space is left for the Hero + Stats "fold". */
+  --nav-height: 60px;
+}
+
+/* =========================
    RESET
    ========================= */
 *, *::before, *::after {
@@ -189,7 +199,7 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(1rem, 4vw, 2.5rem);
-  height: 60px;
+  height: var(--nav-height);
   background: rgba(11,15,14,0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid #1e2e2a;
@@ -270,7 +280,7 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   .nav-links {
     display: none;
     position: fixed;
-    top: 60px; left: 0; right: 0;
+    top: var(--nav-height); left: 0; right: 0;
     flex-direction: column;
     background: #0d1412;
     border-bottom: 1px solid #1e2e2a;
@@ -283,6 +293,36 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
 }
 
 /* =========================
+   HOME — INITIAL VIEWPORT FOLD  (NEW)
+   ========================= */
+/*
+  Wraps Hero + Stats together so that, on first load, this pair
+  always fills (at least) the visible viewport beneath the sticky
+  nav — which in turn pushes Portfolio/Services/Stack/CTA/Footer
+  below the fold so they only appear once the user scrolls.
+
+  IMPORTANT: this uses min-height, not height. That means:
+    - If Hero+Stats content is shorter than the viewport, the fold
+      stretches to fill it (Hero is centered to "fill naturally").
+    - If Hero+Stats content is ever taller than the viewport (e.g.
+      a very short phone in landscape), the fold simply grows to
+      fit its content instead of clipping it. Stats can NEVER be
+      hidden, overlapped, or cut off — it just stays directly
+      below Hero in normal document flow.
+*/
+.home-fold {
+  display: flex;
+  flex-direction: column;
+  /* Fallback for browsers without svh support (e.g. older Safari) */
+  min-height: calc(100vh - var(--nav-height));
+  /* svh = "small viewport height" — accounts for mobile browser
+     chrome (address bar) so content isn't hidden behind it. This
+     is what previously caused Stats to appear pushed off-screen
+     on some mobile devices when using plain vh. */
+  min-height: calc(100svh - var(--nav-height));
+}
+
+/* =========================
    HOME HERO
    ========================= */
 .home-hero {
@@ -290,9 +330,18 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   grid-template-columns: 1fr auto;
   gap: 3rem;
   align-items: center;
+  /* NEW: lets Hero grow to consume the leftover space inside
+     .home-fold, so it "fills the viewport naturally" while Stats
+     (the sibling flex item below) keeps its own natural height. */
+  flex: 1;
+  /* NEW: when Hero is taller than its content (flex-grown), this
+     vertically centers the text/photo row within that extra space
+     instead of leaving it pinned to the top with empty space below. */
+  align-content: center;
   padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .home-hero-text { max-width: 580px; }
@@ -392,6 +441,11 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   border-top: 1px solid #1e2e2a;
   border-bottom: 1px solid #1e2e2a;
   margin: 0 clamp(1rem, 4vw, 2.5rem);
+  /* NEW: as a flex child of .home-fold, prevent Stats from ever
+     being compressed/shrunk by flexbox — it must always render
+     at its natural, fully-readable height. */
+  flex-shrink: 0;
+  width: calc(100% - 2 * clamp(1rem, 4vw, 2.5rem));
 }
 
 .home-stat-item {
@@ -761,6 +815,10 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   .btn-row         { justify-content: center; }
   .home-photo-wrap { margin: 0 auto; }
   .home-photo-ring { width: 160px; height: 160px; }
+  /* NEW: stacked Hero (text + photo on top of each other) is taller
+     than the desktop side-by-side layout, so reduce vertical padding
+     here to keep Hero+Stats comfortably within one viewport. */
+  .home-hero       { padding-top: clamp(2rem, 5vw, 3rem); padding-bottom: clamp(1.5rem, 4vw, 2rem); gap: 1.75rem; }
 
   .about-hero    { grid-template-columns: 1fr; }
   .portfolio-hero { grid-template-columns: 1fr; }
@@ -789,6 +847,16 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
    ========================= */
 @media (max-width: 480px) {
   .home-stats { grid-template-columns: repeat(2, 1fr); }
+
+  /* NEW: smaller photo + tighter padding/gaps free up vertical room
+     so Hero + Stats reliably fit within one small-phone viewport. */
+  .home-photo-ring { width: 130px; height: 130px; }
+  .home-hero {
+    padding-top: 1.5rem;
+    padding-bottom: 1.25rem;
+    gap: 1.25rem;
+  }
+  .home-stat-item { padding: 1rem 0.5rem; }
 
   .portfolio-grid {
     grid-template-columns: 1fr;
