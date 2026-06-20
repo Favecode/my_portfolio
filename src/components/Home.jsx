@@ -114,7 +114,7 @@ export default function Home({ setPage }) {
             <div className="home-photo-ring">
               <div className="home-photo-inner">
                 <img
-                  src="/src/assets/profile.png"
+                  src="/src/assets/profile.jpg"
                   alt="Onaolapo Favour Emmanuel"
                   onError={(e) => { e.target.style.display = "none"; }}
                 />
