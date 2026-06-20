@@ -5,6 +5,7 @@ import { projects } from "../constants";
 import { Code2, Server, Globe, Layers, GitBranch, Cloud, Database, Cpu } from "lucide-react";
 import { FaLinkedin, FaTwitter, FaTiktok } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
+import profile from "../assets/profile.png";
 
 /* ── Animated counter hook ── */
 function useCountUp(target, duration = 1800, suffix = "") {
@@ -114,7 +115,7 @@ export default function Home({ setPage }) {
             <div className="home-photo-ring">
               <div className="home-photo-inner">
                 <img
-                  src="/src/assets/profile.png"
+                  src={profile}
                   alt="Onaolapo Favour Emmanuel"
                   onError={(e) => { e.target.style.display = "none"; }}
                 />
