@@ -74,7 +74,7 @@ export default function Home({ setPage }) {
             <div className="eyebrow">WEB DEVELOPER &amp; DESIGNER · NIGERIA</div>
           
             <h1 className="hero-title">
-              Hi, I'm <span>Favour <br /> Emmanuel Onaolapo</span>
+              Hi, I'm <span>Favour <br /> Emmanuel Onaolapo </span>
             </h1>
 
             <p className="hero-sub">
