@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import { ACCENT, MUTED, CARD, BORDER, CARD2 } from "../constants";
 import { projects } from "../constants";
 import { Code2, Server, Globe, Layers, GitBranch, Cloud, Database, Cpu } from "lucide-react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaTwitter, FaTiktok } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 
 /* ── Animated counter hook ── */
@@ -103,8 +103,8 @@ export default function Home({ setPage }) {
               <a href="https://x.com/myfaveguy" target="_blank" rel="noreferrer" title="X / Twitter">
                 <FaTwitter size={18} />
               </a>
-              <a href="https://github.com" target="_blank" rel="noreferrer" title="GitHub">
-                <FaGithub size={18} />
+              <a href="https://www.tiktok.com/@myfaveguy" target="_blank" rel="noreferrer" title="Tiktok">
+                <FaTiktok size={18} />
               </a>
             </div>
           </div>
