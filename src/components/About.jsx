@@ -3,7 +3,7 @@ import { ACCENT, MUTED } from "../constants";
 import { Code2, Target, Layers, Rocket, CheckCircle2 } from "lucide-react";
 import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
-import profileImg from "../assets/profile.jpg";
+import profileImg from "../assets/profile.png";
 
 export default function About({ setPage }) {
   return (
