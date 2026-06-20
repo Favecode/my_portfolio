@@ -97,7 +97,7 @@ export default function Home({ setPage }) {
               <a href="https://wa.me/2349164925583" target="_blank" rel="noreferrer" title="WhatsApp">
                 <FaWhatsapp size={18} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" title="LinkedIn">
+              <a href="https://www.linkedin.com/in/favour-onaolapo-a78b99416?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer" title="LinkedIn">
                 <FaLinkedin size={18} />
               </a>
               <a href="https://x.com/myfaveguy" target="_blank" rel="noreferrer" title="X / Twitter">

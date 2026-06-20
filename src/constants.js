@@ -30,8 +30,8 @@ export const projects = [
   {
     id: 2,
     type: "Web Development",
-    title: "Barbershop Website",
-    desc: "Premium barbershop brand site with a dark luxury aesthetic and service showcase.",
+    title: "Blade and Crown",
+    desc: "Blade and Crown brand site with a dark luxury aesthetic and service showcase.",
     filter: "web-development",
     image: project2,
     link: "https://barbarshop-website.vercel.app/",
