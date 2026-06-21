@@ -12,7 +12,9 @@ export default function Nav({ page, setPage }) {
   return (
     <nav className="nav">
       <button className="nav-logo" onClick={() => navigateTo("home")}>
-        favecodes
+        <span className="nav-logo-bracket">&lt;</span>
+        <span className="nav-logo-initials">FE</span>
+        <span className="nav-logo-bracket">/&gt;</span>
       </button>
 
       <div className={`nav-links${menuOpen ? " open" : ""}`}>

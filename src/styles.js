@@ -1244,6 +1244,346 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   cursor: pointer;
   font-family: inherit;
 }
+
+/* =========================================================
+   NEW: LIVELY ANIMATIONS
+   (Purely additive — does not modify any rule above.
+   Existing classes get extra hover/active rules layered on
+   top via the same selectors; new utility classes like
+   .reveal / .pop-in / .shimmer are opt-in and only do
+   anything if you add them to an element's className.)
+   ========================================================= */
+
+/* ---- shared easing ---- */
+:root {
+  --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- BUTTONS: bouncy press + glow pulse ---- */
+.btn-primary,
+.btn-ghost,
+.hire-btn,
+.submit-btn {
+  transition: transform 0.25s var(--bounce), background 0.2s, box-shadow 0.3s, border-color 0.2s;
+}
+
+.btn-primary:hover,
+.hire-btn:hover,
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(0, 229, 176, 0.35);
+}
+.btn-primary:active,
+.hire-btn:active,
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 6px 20px rgba(0, 229, 176, 0.18);
+}
+.btn-ghost:active {
+  transform: translateY(0) scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 176, 0.0); }
+  50%      { box-shadow: 0 0 0 6px rgba(0, 229, 176, 0.12); }
+}
+.btn-glow-pulse { animation: glowPulse 2.4s ease-in-out infinite; }
+
+/* ---- CARDS: lively scale + glow lift ---- */
+.card,
+.portfolio-card,
+.testimonial-card,
+.stack-hero-card,
+.infra-card,
+.why-item,
+.home-stack-pill {
+  transition: transform 0.35s var(--bounce), border-color 0.25s, box-shadow 0.35s;
+}
+
+.card:hover,
+.testimonial-card:hover,
+.stack-hero-card:hover,
+.infra-card:hover {
+  transform: translateY(-6px) scale(1.025);
+  box-shadow: 0 14px 32px rgba(0, 229, 176, 0.16);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(0, 229, 176, 0.2);
+}
+
+.why-item:hover {
+  transform: translateX(6px) scale(1.01);
+  box-shadow: 0 8px 22px rgba(0, 229, 176, 0.12);
+}
+
+.home-stack-pill:hover {
+  transform: translateY(-4px) scale(1.06) rotate(-1deg);
+  box-shadow: 0 10px 22px rgba(0, 229, 176, 0.2);
+}
+
+/* ---- CARD ICONS: playful bounce on parent hover ---- */
+.card-icon {
+  transition: transform 0.4s var(--bounce), background 0.25s;
+}
+.card:hover .card-icon {
+  transform: scale(1.15) rotate(-6deg);
+  background: rgba(0, 229, 176, 0.16);
+}
+
+.why-emoji {
+  transition: transform 0.4s var(--bounce), background 0.25s;
+}
+.why-item:hover .why-emoji {
+  transform: scale(1.18) rotate(8deg);
+  background: rgba(0, 229, 176, 0.18);
+}
+
+/* ---- NAV: code-tag logo + smooth color-fill hover ---- */
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Fira Code', monospace;
+  transition: transform 0.4s var(--bounce);
+}
+.nav-logo:hover {
+  transform: scale(1.06);
+}
+.nav-logo-bracket {
+  color: #e8f0ed;
+}
+.nav-logo-initials {
+  color: #00e5b0;
+}
+
+.nav-link {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+.nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 229, 176, 0.12);
+  border-radius: 6px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--bounce);
+  z-index: -1;
+}
+.nav-link:hover::before {
+  transform: scaleX(1);
+}
+.nav-link:hover {
+  color: #e8f0ed;
+}
+.nav-link.active {
+  color: #00e5b0;
+}
+.nav-link.active::before {
+  transform: scaleX(1);
+  background: rgba(0, 229, 176, 0.1);
+}
+
+/* ---- PHOTO RING: rotating gradient glow ---- */
+@keyframes ringRotate {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.home-photo-ring {
+  background: conic-gradient(from var(--angle), #00e5b0, transparent 35%, transparent 65%, #00e5b0);
+  animation: ringRotate 6s linear infinite;
+}
+.home-photo-ring:hover {
+  animation-duration: 2s;
+}
+
+/* ---- STATS: pop-in (trigger by adding .pop-in class, e.g. via IntersectionObserver) ---- */
+@keyframes statPop {
+  0%   { opacity: 0; transform: scale(0.5) translateY(10px); }
+  60%  { opacity: 1; transform: scale(1.12) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.home-stat-item.pop-in .home-stat-num {
+  animation: statPop 0.6s var(--bounce) both;
+}
+.home-stat-item.pop-in:nth-child(1) .home-stat-num { animation-delay: 0.05s; }
+.home-stat-item.pop-in:nth-child(2) .home-stat-num { animation-delay: 0.15s; }
+.home-stat-item.pop-in:nth-child(3) .home-stat-num { animation-delay: 0.25s; }
+.home-stat-item.pop-in:nth-child(4) .home-stat-num { animation-delay: 0.35s; }
+
+/* ---- SCROLL-REVEAL: opt-in utility ----
+   Usage: add className="reveal" to any section/element,
+   then toggle a "visible" class via IntersectionObserver
+   in your React components (Home.jsx, Portfolio.jsx, etc).
+   General pattern:
+     1. Create a ref and a visible state (useState/useEffect).
+     2. Observe the ref with IntersectionObserver, threshold 0.15.
+     3. When isIntersecting is true, set visible to true.
+     4. Combine "reveal" with "visible" (when true) as the
+        element's className, e.g. via a template string or
+        array.join(' ').
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(36px) scale(0.96);
+  transition: opacity 0.7s var(--bounce), transform 0.7s var(--bounce);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s var(--bounce), transform 0.7s var(--bounce);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s var(--bounce), transform 0.7s var(--bounce);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* stagger helper for groups of revealed children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--bounce), transform 0.6s var(--bounce);
+}
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.4s; }
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- FAQ ACCORDION: smoother feel + icon rotation ---- */
+.faq-item {
+  transition: border-color 0.25s, transform 0.25s var(--bounce);
+}
+.faq-item:hover {
+  transform: translateX(4px);
+}
+.faq-item.open {
+  transform: scale(1.01);
+}
+.faq-answer {
+  animation: fadeIn 0.35s ease;
+}
+.faq-toggle-icon {
+  display: inline-flex;
+  transition: transform 0.35s var(--bounce);
+}
+.faq-item.open .faq-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* ---- AVAILABILITY DOT: lively bounce instead of plain pulse ---- */
+@keyframes pulseBounce {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.4); opacity: 0.5; }
+}
+.availability-dot {
+  animation: pulseBounce 1.6s var(--bounce) infinite;
+}
+
+/* ---- GENERAL: shimmer utility (for highlights/loading) ----
+   Usage: add className="shimmer" to any element with text/bg.
+*/
+@keyframes shimmerSweep {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    rgba(0,229,176,0) 30%,
+    rgba(0,229,176,0.25) 50%,
+    rgba(0,229,176,0) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 2.5s ease-in-out infinite;
+}
+
+/* ---- SECTION TITLES: tiny entrance bounce on the accent span ----
+   NOTE: .hero-title span intentionally excluded — that's the name
+   on the Home page and should stay static, not animated. */
+@keyframes accentPop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  70%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.section-title span {
+  display: inline-block;
+  animation: accentPop 0.5s var(--bounce) both;
+}
+
+/* ---- FILTER BUTTONS: bouncy active state ---- */
+.filter-btn {
+  transition: transform 0.3s var(--bounce), background 0.2s, border-color 0.2s, color 0.2s;
+}
+.filter-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+.filter-btn.active {
+  transform: scale(1.06);
+}
+
+/* ---- TAGS: gentle hover pop ---- */
+.tag {
+  transition: transform 0.25s var(--bounce), border-color 0.2s, color 0.2s;
+}
+.tag:hover {
+  transform: translateY(-2px) scale(1.08);
+  border-color: rgba(0,229,176,0.4);
+  color: #00e5b0;
+}
+
+/* ---- RESPECT REDUCED MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  .home-photo-ring,
+  .availability-dot,
+  .shimmer,
+  .btn-glow-pulse,
+  .section-title span,
+  .hero-title span {
+    animation: none !important;
+  }
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
 `;
 
 export default globalCSS;
