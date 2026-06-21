@@ -618,6 +618,7 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
   max-width: 1100px;
   margin: 0 auto;
+  width: 100%;
 }
 
 /* =========================
@@ -631,6 +632,30 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
   max-width: 1100px;
   margin: 0 auto;
+  width: 100%;
+}
+
+/* =========================
+   PAGE FOLD — generic version of .home-fold  (NEW, DESKTOP ONLY)
+   ========================= */
+/*
+  Used to wrap the Hero (+ code block) on Portfolio, Services, and
+  Stack pages so that, on desktop first load, the Hero alone fills
+  (at least) the visible viewport beneath the sticky nav — pushing
+  every section after it below the fold until the user scrolls.
+
+  IMPORTANT: this entire fold behavior is DESKTOP ONLY (min-width:
+  901px, matching the existing 900px tablet breakpoint elsewhere in
+  this file). On mobile and tablet, .page-fold and the hero's
+  flex/align-content rules are intentionally NOT applied — those
+  screen sizes keep their original, already-working layout exactly
+  as it was before this change. See the @media (min-width: 901px)
+  block further down for the actual rules.
+*/
+.page-fold {
+  /* Mobile/tablet: no special height behavior at all — this class
+     is a no-op below 901px so existing layout is 100% unaffected. */
+  display: contents;
 }
 
 .code-block {
@@ -839,6 +864,83 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   .section [style*="grid-template-columns: 1fr 1fr"] {
     display: grid !important;
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* =========================
+   RESPONSIVE — DESKTOP-ONLY PAGE FOLD  (NEW)
+   ========================= */
+/*
+  Everything in this block ONLY applies at 901px and wider — i.e.
+  strictly above the existing 900px tablet breakpoint used
+  throughout this file. Mobile and tablet layouts for Portfolio,
+  Services, and Stack are completely untouched and keep their
+  original, already-working behavior.
+
+  On desktop, .page-fold (wrapping Hero + code block in
+  Portfolio.jsx, Services.jsx, Stack.jsx) is locked to EXACTLY one
+  viewport's height beneath the sticky nav — Hero is the only thing
+  visible until the user scrolls, with zero peek-through from the
+  next section, even on shorter laptop screens.
+
+  This uses a hard "height" (not min-height) + "overflow: hidden",
+  by explicit choice: if a window is unusually short, the hero's
+  own content (padding, code-block line spacing) is tightened below
+  via clamp() so it shrinks to fit rather than letting the fold
+  grow past one screen and let the next section's edge show through.
+*/
+@media (min-width: 901px) {
+  .page-fold {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    /* Fallback for browsers without svh support (e.g. older Safari) */
+    height: calc(100vh - var(--nav-height));
+    /* svh = "small viewport height" — accounts for browser chrome
+       so content isn't hidden behind it. */
+    height: calc(100svh - var(--nav-height));
+  }
+
+  /* Hero no longer needs flex:1 — .page-fold now centers it via
+     justify-content, and height is fixed rather than min-height.
+     Padding is tightened with a lower clamp ceiling so the hero
+     reliably fits one viewport instead of pushing past it on
+     shorter laptop screens. .services-hero is also used by
+     Stack.jsx, so this covers both pages.
+
+     min-height: 0 overrides the flex item default of
+     min-height: auto, which otherwise refuses to let a flex child
+     shrink below its content's natural size — this is what allowed
+     a sliver of overflow to escape the fold even with overflow:
+     hidden on the parent. max-height + overflow: hidden on the
+     hero itself is a second safety net: if content is still taller
+     than the fold for any reason, it's clipped here directly
+     rather than pushing the next section into view. */
+  .portfolio-hero,
+  .services-hero {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+    padding-bottom: clamp(1.5rem, 4vw, 3rem);
+    min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  /* Tighten code block line spacing on desktop only, so the block
+     takes up noticeably less vertical room and never forces the
+     fold taller than one screen. */
+  .portfolio-hero .code-block,
+  .services-hero .code-block {
+    padding: 1.1rem 1.5rem;
+    line-height: 1.6;
+  }
+  .portfolio-hero .code-dots,
+  .services-hero .code-dots {
+    margin-bottom: 0.7rem;
+  }
+  .portfolio-hero .code-line,
+  .services-hero .code-line {
+    margin-bottom: 0.3rem;
   }
 }
 

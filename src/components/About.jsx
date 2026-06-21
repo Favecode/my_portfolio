@@ -26,7 +26,7 @@ export default function About({ setPage }) {
         </div>
 
         <div>
-          <div className="eyebrow">Web Developer &amp; WordPress Engineer</div>
+          <div className="eyebrow">Web Developer &amp; Designer</div>
           <h1 className="hero-title">
             Building <span>scalable web systems</span> and high-performance WordPress solutions.
           </h1>
@@ -95,7 +95,7 @@ export default function About({ setPage }) {
         <div className="philosophy-grid">
           <div className="card">
             <div className="card-icon"><Code2 /></div>
-            <div className="card-title">Web Development Engineering</div>
+            <div className="card-title">Web Development</div>
             <div className="card-text">Building complete systems using React, Node.js, Python, and APIs that scale.</div>
           </div>
           <div className="card">
