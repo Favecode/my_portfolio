@@ -1581,26 +1581,75 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
   transform: translateY(0);
 }
 
-/* ---- FAQ ACCORDION: smoother feel + icon rotation ---- */
+/* ── FAQ ── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+ 
 .faq-item {
-  transition: border-color 0.25s, transform 0.25s var(--bounce);
+  background: #111816;
+  border: 1px solid #1e2e2a;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.25s;
 }
 .faq-item:hover {
-  transform: translateX(4px);
+  border-color: rgba(0,229,176,0.25);
 }
 .faq-item.open {
-  transform: scale(1.01);
+  border-color: rgba(0,229,176,0.35);
 }
-.faq-answer {
-  animation: fadeIn 0.35s ease;
+ 
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
+ 
+.faq-question-text {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #e8f0ed;
+  line-height: 1.5;
+  flex: 1;
+}
+ 
 .faq-toggle-icon {
+  color: #00e5b0;
+  flex-shrink: 0;
   display: inline-flex;
-  transition: transform 0.35s var(--bounce);
+  transition: transform 0.3s ease;
 }
+ 
 .faq-item.open .faq-toggle-icon {
   transform: rotate(180deg);
 }
+ 
+.faq-answer {
+  padding: 0 1.3rem 1.2rem;
+  border-top: 1px solid #1e2e2a;
+  background: #0e1512;
+}
+ 
+.faq-answer-text,
+.faq-answer p {
+  font-size: 0.875rem;
+  color: #cfe2dc !important;
+  background: transparent !important;
+  line-height: 1.75;
+  padding-top: 1rem;
+  margin: 0;
+}
+ 
 
 /* ---- AVAILABILITY DOT: lively bounce instead of plain pulse ---- */
 @keyframes pulseBounce {
@@ -1686,6 +1735,496 @@ p  { font-size: 1rem; line-height: 1.8; color: #cfe2dc; }
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================
+   HOME REDESIGN — NEW SECTION STYLES
+   Append these rules inside the globalCSS template literal
+   in styles.js, just before the closing backtick.
+   ========================================================== */
+
+/* ── HERO SAAS ── */
+.hero-saas {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 4vw, 2.5rem) 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Subtle dot-grid background */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(0,229,176,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+.hero-saas-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  background: rgba(0,229,176,0.08);
+  border: 1px solid rgba(0,229,176,0.2);
+  border-radius: 100px;
+  padding: 0.3rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-saas-title {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+.hero-saas-title span { color: #00e5b0; }
+
+.hero-saas-sub {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: #cfe2dc;
+  line-height: 1.75;
+  max-width: 620px;
+  margin: 0 auto 1.8rem;
+}
+
+.hero-saas-btns {
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* Trust badges */
+.hero-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.hero-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7a9990;
+  background: #111816;
+  border: 1px solid #1e2e2a;
+  border-radius: 100px;
+  padding: 0.3rem 0.85rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.hero-trust-badge:hover {
+  border-color: rgba(0,229,176,0.35);
+  color: #e8f0ed;
+}
+.hero-trust-icon {
+  color: #00e5b0;
+  display: flex;
+}
+
+/* Hero stats strip reuse — override margin for hero context */
+.hero-saas-stats {
+  margin-top: 3rem;
+  /* override the horizontal margin from home-stats to be full-width inside hero */
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+/* ── LOGO MARQUEE STRIP ── */
+.logos-section {
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-top: 1px solid #1e2e2a;
+  border-bottom: 1px solid #1e2e2a;
+  overflow: hidden;
+  background: #0e1614;
+}
+
+.logos-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+}
+
+.logos-track {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  width: max-content;
+  animation: logoScroll 28s linear infinite;
+}
+.logos-track:hover { animation-play-state: paused; }
+
+@keyframes logoScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.logo-placeholder {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2e4a44;
+  white-space: nowrap;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #1a2e28;
+  border-radius: 8px;
+  background: #0d1815;
+  transition: color 0.2s, border-color 0.2s;
+}
+.logo-placeholder:hover {
+  color: #7a9990;
+  border-color: #2e4a44;
+}
+
+/* ── PRICING ── */
+.pricing-section {
+  /* Section already has padding; just remove extra top padding */
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.pricing-card {
+  background: #111816;
+  border: 1px solid #1e2e2a;
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.pricing-card:hover {
+  border-color: rgba(0,229,176,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,229,176,0.1);
+}
+
+.pricing-card-featured {
+  border-color: rgba(0,229,176,0.4);
+  background: linear-gradient(160deg, #111816 0%, rgba(0,229,176,0.04) 100%);
+}
+.pricing-card-featured:hover {
+  border-color: #00e5b0;
+  box-shadow: 0 16px 40px rgba(0,229,176,0.18);
+}
+
+.pricing-popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00e5b0;
+  color: #0b0f0e;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.9rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.pricing-tier {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #00e5b0;
+  margin-bottom: 0.6rem;
+}
+
+.pricing-price {
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 800;
+  color: #e8f0ed;
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+.pricing-dash { color: #7a9990; font-weight: 400; margin: 0 0.15rem; }
+
+.pricing-desc {
+  font-size: 0.82rem;
+  color: #7a9990;
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+}
+
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.6rem;
+  flex: 1;
+}
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: #cfe2dc;
+  line-height: 1.5;
+}
+
+.pricing-btn {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+/* ── BLOG ── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.2rem;
+}
+
+.blog-card {
+  background: #111816;
+  border: 1px solid #1e2e2a;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.blog-card:hover {
+  border-color: rgba(0,229,176,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,229,176,0.1);
+}
+
+.blog-img {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+}
+
+.blog-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  color: #7a9990;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+.blog-category {
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.blog-meta-sep { color: #2e4a44; }
+.blog-date, .blog-readtime {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.blog-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  color: #e8f0ed;
+}
+
+.blog-desc {
+  font-size: 0.8rem;
+  color: #7a9990;
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.blog-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #00e5b0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: gap 0.2s, opacity 0.2s;
+}
+.blog-read-more:hover {
+  gap: 0.55rem;
+  opacity: 0.8;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonial-carousel {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.testimonial-card-main {
+  background: #111816;
+  border: 1px solid #1e2e2a;
+  border-radius: 20px;
+  padding: 2.2rem 2rem;
+  text-align: center;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  transition: box-shadow 0.4s;
+}
+.testimonial-card-main:hover {
+  box-shadow: 0 12px 36px rgba(0,229,176,0.1);
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+}
+
+.testimonial-text {
+  font-size: clamp(0.92rem, 2vw, 1.05rem);
+  color: #e8f0ed;
+  line-height: 1.75;
+  font-style: italic;
+  max-width: 560px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,229,176,0.12);
+  border: 1px solid rgba(0,229,176,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #00e5b0;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.testimonial-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #e8f0ed;
+}
+.testimonial-role {
+  font-size: 0.75rem;
+  color: #7a9990;
+  margin-top: 0.15rem;
+}
+
+.testimonial-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+
+.testimonial-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1e2e2a;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+}
+.testimonial-dot.active {
+  background: #00e5b0;
+  transform: scale(1.3);
+}
+.testimonial-dot:hover {
+  background: rgba(0,229,176,0.5);
+}
+
+/* ── FLOATING WHATSAPP ── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+}
+
+/* Pulse ring */
+.whatsapp-float-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(37,211,102,0.35);
+  animation: waPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes waPulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* ── RESPONSIVE TWEAKS ── */
+@media (max-width: 768px) {
+  .hero-saas-title { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+  .hero-trust-badges { gap: 0.4rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .testimonial-card-main { padding: 1.5rem 1.2rem; }
+  .whatsapp-float { bottom: 1.1rem; right: 1.1rem; width: 50px; height: 50px; }
+}
+
 `;
 
 export default globalCSS;
