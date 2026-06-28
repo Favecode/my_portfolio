@@ -1,0 +1,105 @@
+/* ─── Hire.css ─────────────────────────────────────────────────────────────── */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 2.5rem);
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* Contact info items */
+.contact-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+.contact-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(0,229,176,0.08);
+  border: 1px solid rgba(0,229,176,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--accent);
+  flex-shrink: 0;
+}
+.contact-label { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.15rem; }
+.contact-val   { font-size: 0.85rem; font-weight: 600; }
+
+/* Availability card */
+.availability-card {
+  display: flex; gap: 1rem; align-items: flex-start;
+  background: rgba(0,229,176,0.05);
+  border: 1px solid rgba(0,229,176,0.2);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.availability-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0; margin-top: 0.35rem;
+  animation: pulse 2s infinite;
+}
+.availability-title { font-size: 0.88rem; font-weight: 700; color: var(--accent); margin-bottom: 0.2rem; }
+.availability-desc  { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+/* Quick facts */
+.quick-fact {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+.quick-fact:last-child { border-bottom: none; }
+.quick-fact-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.quick-fact-val   { font-size: 0.85rem; font-weight: 600; color: var(--text); text-align: right; }
+
+/* Form */
+.form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.form-label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; font-weight: 600; }
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus { border-color: rgba(0,229,176,0.5); }
+.form-input::placeholder,
+.form-textarea::placeholder { color: #3a4e4a; }
+.form-textarea  { min-height: 110px; resize: vertical; }
+.form-select option { background: var(--card); }
+
+.submit-btn {
+  width: 100%;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700; font-size: 0.9rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.submit-btn:hover:not(:disabled) { background: var(--accent2); transform: translateY(-1px); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .contact-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .contact-layout { padding: 2rem 1rem; }
+  .form-row { grid-template-columns: 1fr; }
+}

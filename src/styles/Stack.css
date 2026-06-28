@@ -1,0 +1,25 @@
+/* ─── Stack.css ────────────────────────────────────────────────────────────── */
+
+/* Stack uses .services-hero from global.css */
+
+.infra-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.infra-card:hover { border-color: rgba(0,229,176,0.3); transform: translateY(-2px); }
+.infra-name { font-size: 0.8rem; font-weight: 700; }
+
+.proficiency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 1.5rem;
+}
+.proficiency-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+.proficiency-text  { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }

@@ -1,0 +1,237 @@
+/* ─── Home.css ─────────────────────────────────────────────────────────────── */
+
+/* ── Hero (SaaS centred layout) ── */
+.hero-saas {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 4vw, 2.5rem) 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 229, 176, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+.hero-saas-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  background: rgba(0, 229, 176, 0.08);
+  border: 1px solid rgba(0, 229, 176, 0.2);
+  border-radius: 100px;
+  padding: 0.3rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-saas-title {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+.hero-saas-title span { color: var(--accent); }
+
+.hero-saas-sub {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: #cfe2dc;
+  line-height: 1.75;
+  max-width: 620px;
+  margin: 0 auto 1.8rem;
+}
+
+.hero-saas-btns { justify-content: center; margin-bottom: 2rem; }
+
+/* Trust badges */
+.hero-trust-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+.hero-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.3rem 0.85rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+.hero-trust-badge:hover { border-color: rgba(0, 229, 176, 0.35); color: var(--text); }
+.hero-trust-icon { color: var(--accent); display: flex; }
+
+/* Socials row in hero */
+.home-socials { display: flex; gap: 1rem; margin-top: 1.8rem; align-items: center; justify-content: center; }
+.home-socials a { color: var(--muted); transition: color 0.2s, transform 0.2s; display: flex; }
+.home-socials a:hover { color: var(--accent); transform: translateY(-2px); }
+
+/* ── Stats strip ── */
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-top: 3rem;
+}
+.home-stat-item {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.home-stat-item:last-child { border-right: none; }
+.home-stat-num   { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 800; color: var(--accent); line-height: 1; }
+.home-stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ── Logo marquee ── */
+.logos-section {
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  background: #0e1614;
+}
+.logos-inner { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+.logos-track {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  width: max-content;
+  animation: logoScroll 28s linear infinite;
+}
+.logos-track:hover { animation-play-state: paused; }
+@keyframes logoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.logo-placeholder {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2e4a44;
+  white-space: nowrap;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #1a2e28;
+  border-radius: 8px;
+  background: #0d1815;
+  transition: color 0.2s, border-color 0.2s;
+}
+.logo-placeholder:hover { color: var(--muted); border-color: #2e4a44; }
+
+/* ── Stack pills ── */
+.home-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 0.75rem;
+}
+.home-stack-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: border-color 0.25s, transform 0.25s var(--bounce), box-shadow 0.25s;
+}
+.home-stack-pill:hover {
+  border-color: rgba(0, 229, 176, 0.3);
+  transform: translateY(-4px) scale(1.06) rotate(-1deg);
+  box-shadow: 0 10px 22px rgba(0, 229, 176, 0.18);
+}
+
+/* ── Blog cards (3 on home) ── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.2rem;
+}
+.blog-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.blog-card:hover { border-color: rgba(0,229,176,0.25); transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,229,176,0.1); }
+.blog-img { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 900; }
+.blog-body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
+.blog-meta { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.6rem; flex-wrap: wrap; }
+.blog-category { font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.blog-meta-sep { color: #2e4a44; }
+.blog-title { font-size: 0.95rem; font-weight: 700; line-height: 1.4; margin-bottom: 0.5rem; color: var(--text); }
+.blog-desc  { font-size: 0.8rem; color: var(--muted); line-height: 1.6; flex: 1; margin-bottom: 1rem; }
+.blog-read-more {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.78rem; font-weight: 700; color: var(--accent);
+  background: none; border: none; padding: 0; cursor: pointer;
+  transition: gap 0.2s, opacity 0.2s;
+}
+.blog-read-more:hover { gap: 0.55rem; opacity: 0.8; }
+
+/* ── Portfolio preview (same grid as Portfolio page) ── */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 1.2rem;
+}
+.portfolio-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.portfolio-card:hover { border-color: rgba(0,229,176,0.3); transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,229,176,0.15); }
+.portfolio-img {
+  width: 100%; height: 160px;
+  overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; font-weight: 900;
+}
+.portfolio-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
+.portfolio-card:hover .portfolio-img img { transform: scale(1.06); }
+.portfolio-card-body { padding: 1rem 1.1rem 1.2rem; }
+.portfolio-type       { font-size: 0.7rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
+.portfolio-card-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
+.portfolio-card-desc  { font-size: 0.8rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.75rem; }
+.view-link { font-size: 0.78rem; color: var(--accent); font-weight: 600; transition: opacity 0.2s; }
+.view-link:hover { opacity: 0.7; }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .home-stats { grid-template-columns: repeat(2, 1fr); }
+  .home-stat-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .home-stat-item:nth-child(2) { border-right: none; }
+  .home-stat-item:nth-child(3),
+  .home-stat-item:nth-child(4) { border-bottom: none; }
+  .home-stat-item:nth-child(4) { border-right: none; }
+  .hero-saas { padding-top: clamp(2.5rem, 5vw, 4rem); }
+}
+
+@media (max-width: 600px) {
+  .home-stats { grid-template-columns: repeat(2, 1fr); }
+  .home-stat-item { padding: 1rem 0.5rem; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .blog-grid  { grid-template-columns: 1fr; }
+  .home-stack-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .home-stack-pill { font-size: 0.75rem; padding: 0.6rem 0.75rem; }
+  .hero-saas  { padding-top: 2.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logos-track { animation: none !important; }
+}

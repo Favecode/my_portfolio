@@ -12,6 +12,7 @@ import { FaLinkedin, FaTwitter, FaTiktok } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 import { createPortal } from "react-dom";
 
+
 /* ── Animated counter hook ── */
 function useCountUp(target, duration = 1800, suffix = "") {
   const [display, setDisplay] = useState("0" + suffix);

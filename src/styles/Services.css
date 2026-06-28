@@ -1,0 +1,16 @@
+/* ─── Services.css ─────────────────────────────────────────────────────────── */
+
+/* Services uses .services-hero from global.css */
+/* No additional unique layout beyond global shared classes */
+
+/* Stack card used on services & stack pages */
+.stack-hero-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.stack-hero-card:hover { border-color: rgba(0,229,176,0.3); transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,229,176,0.12); }
+.stack-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+.stack-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }

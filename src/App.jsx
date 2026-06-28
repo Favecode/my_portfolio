@@ -1,34 +1,41 @@
-import { useState, useEffect } from "react";
-import globalCSS from "./styles";
-import Nav from "./components/Nav";
-import Home from "./components/Home";
-import Portfolio from "./components/Portfolio";
-import Services from "./components/Services";
-import Stack from "./components/Stack";
-import About from "./components/About";
-import Hire from "./components/Hire";
+// ─── src/App.jsx ──────────────────────────────────────────────────────────────
+// Root component — imports global CSS once, routes between pages.
+
+import { useState } from "react";
+import "./styles/global.css";
+
+import Nav       from "./components/Nav";
+import Home      from "./pages/Home";
+import About     from "./pages/About";
+import Portfolio from "./pages/Portfolio";
+import Blog      from "./pages/Blog";
+import Services  from "./pages/Services";
+import Stack     from "./pages/Stack";
+import Pricing   from "./pages/Pricing";
+import Hire      from "./pages/Hire";
 
 export default function App() {
   const [page, setPage] = useState("home");
 
-  // Scroll to top every time the page state changes
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [page]);
+  const navigate = (target) => {
+    setPage(target);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  };
 
   const pages = {
-    home:      <Home setPage={setPage} />,
-    about:     <About setPage={setPage} />,
-    portfolio: <Portfolio setPage={setPage} />,
-    services:  <Services setPage={setPage} />,
-    stack:     <Stack setPage={setPage} />,
-    hire:      <Hire setPage={setPage} />,
+    home:      <Home      setPage={navigate} />,
+    about:     <About     setPage={navigate} />,
+    portfolio: <Portfolio setPage={navigate} />,
+    blog:      <Blog      setPage={navigate} />,
+    services:  <Services  setPage={navigate} />,
+    stack:     <Stack     setPage={navigate} />,
+    pricing:   <Pricing   setPage={navigate} />,
+    hire:      <Hire      setPage={navigate} />,
   };
 
   return (
     <>
-      <style>{globalCSS}</style>
-      <Nav page={page} setPage={setPage} />
+      <Nav page={page} setPage={navigate} />
       {pages[page] || pages.home}
     </>
   );
