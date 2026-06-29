@@ -12,18 +12,38 @@ import project1 from "../assets/project1.png";
 import project2 from "../assets/project2.png";
 import project3 from "../assets/project3.png";
 import project4 from "../assets/project5.png";
-
-
+import project6 from "../assets/project6.png";
+import project7 from "../assets/project7.png";
 
 // 1 USD ≈ 1600 NGN (2026 approx)
 export const USD_RATE = 1600;
 export const toUSD = (naira) => Math.round(naira / USD_RATE);
 
 export const projects = [
-  { id: 1, image: project1, type: "E-commerce",     title: "Verve Market",   desc: "A modern, high-performance e-commerce storefront featuring seamless product browsing, responsive design, and a smooth checkout experience.", filter: "web-development", link: "https://nova-ecommerce-coral.vercel.app/", color: "#00e5b0" },
+  {
+ id: 6,
+  image: project6,
+  type: "Web Development",
+  title: "Doramart Cocktail & Drinks",
+  desc: "A stylish cocktail bar website featuring signature drinks, reservations, events, and an elegant user experience.",
+  filter: "web-development",
+  link: "https://doramart.vercel.app/",
+  color: "#722ed1"
+},
   { id: 2, image: project2, type: "Web Development", title: "Blade and Crown", desc: "Blade and Crown brand site with a dark luxury aesthetic and service showcase.",                                                            filter: "web-development", link: "https://barbarshop-website.vercel.app/",   color: "#7c6dfa" },
   { id: 3, image: project3, type: "Web Development", title: "Glow's Haven",   desc: "Beauty and wellness brand site with an elegant, minimal product-focused layout.",                                                           filter: "web-development", link: "https://glowshaven.netlify.app/",          color: "#f759ab" },
-  { id: 4, image: project4, type: "Web Development", title: "Savoria Foods",  desc: "A modern food ordering platform built with a clean, appetising user experience.",                                                           filter: "web-development", link: "https://savoriafoods.netlify.app/",        color: "#fa8c16" },
+  { id: 4, image: project1, type: "Web Development", title: "Savoria Foods",  desc: "A modern food ordering platform built with a clean, appetising user experience.",                                                           filter: "web-development", link: "https://savoriafoods.netlify.app/",        color: "#fa8c16" },
+   { id: 1, image: project4, type: "Web Development", title: "Verve Market",   desc: "A modern, high-performance e-commerce storefront featuring seamless product browsing, responsive design, and a smooth checkout experience.", filter: "web-development", link: "https://nova-ecommerce-coral.vercel.app/", color: "#00e5b0" },
+   {
+  id: 5,  image: project7,
+  type: "Web Development",
+  title: "S&V Construction",
+  desc: "A modern construction company website showcasing services, completed projects, and easy client contact.",
+  filter: "web-development",
+  link: "https://construction-teal-six.vercel.app/",
+  color: "#d48806"
+},
+
 ];
 
 export const blogPosts = [
