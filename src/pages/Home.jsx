@@ -207,12 +207,13 @@ export default function Home({ setPage }) {
         <div className="blog-grid">
           {homeBlogPosts.map((post) => (
             <article key={post.id} className="blog-card">
-              <div
-                className="blog-img"
-                style={{ background: `linear-gradient(135deg,${post.color}22,${post.color}08)`, borderBottom: `1px solid ${post.color}22` }}
-              >
-                <span style={{ color: post.color }}>{post.initials}</span>
-              </div>
+              <div className="blog-img">
+  <img
+    src={post.image}
+    alt={post.title}
+    loading="lazy"
+  />
+</div>
               <div className="blog-body">
                 <div className="blog-meta">
                   <span className="blog-category" style={{ color: post.color }}>{post.category}</span>

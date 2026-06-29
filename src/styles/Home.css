@@ -167,7 +167,22 @@
   transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
 }
 .blog-card:hover { border-color: rgba(0,229,176,0.25); transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,229,176,0.1); }
-.blog-img { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 900; }
+.blog-img {
+  height: 180px;
+  overflow: hidden;
+}
+
+.blog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.blog-card:hover .blog-img img {
+  transform: scale(1.05);
+}
 .blog-body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
 .blog-meta { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.6rem; flex-wrap: wrap; }
 .blog-category { font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; }

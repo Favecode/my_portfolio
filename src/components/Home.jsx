@@ -234,9 +234,14 @@ function FAQ() {
 }
 
 /* ── Blog articles ── */
+import blog1 from "../assets/blog1.png";
+import blog2 from "../assets/blog2.jpeg";
+import blog3 from "../assets/blog3.jpeg";
 const blogPosts = [
+  
   {
     id: 1,
+    image: blog1,
     category: "Web Design",
     date: "June 10, 2026",
     readTime: "8 min read",
@@ -247,6 +252,7 @@ const blogPosts = [
   },
   {
     id: 2,
+    image: blog2,
     category: "Business Growth",
     date: "May 28, 2026",
     readTime: "6 min read",
@@ -257,6 +263,7 @@ const blogPosts = [
   },
   {
     id: 3,
+    image: blog3,
     category: "SEO",
     date: "May 14, 2026",
     readTime: "7 min read",
@@ -529,58 +536,98 @@ export default function Home({ setPage }) {
       </section>
 
       {/* ═══════════════════════════════════
-           BLOG
-      ═══════════════════════════════════ */}
-      <section
-        className={`section reveal${blogReveal.visible ? " visible" : ""}`}
-        ref={blogReveal.ref}
-        aria-labelledby="blog-title"
+          BLOG
+═══════════════════════════════════ */}
+<section
+  className={`section reveal${blogReveal.visible ? " visible" : ""}`}
+  ref={blogReveal.ref}
+  aria-labelledby="blog-title"
+>
+  <div className="section-header-row">
+    <div>
+      <div className="eyebrow">Latest Articles</div>
+      <h2 className="section-title" id="blog-title">
+        Expert insights on <span>websites &amp; growth.</span>
+      </h2>
+      <p
+        style={{
+          color: "#7a9990",
+          fontSize: "0.87rem",
+          marginTop: "0.4rem",
+        }}
       >
-        <div className="section-header-row">
-          <div>
-            <div className="eyebrow">Latest Articles</div>
-            <h2 className="section-title" id="blog-title">
-              Expert insights on <span>websites &amp; growth.</span>
-            </h2>
-            <p style={{ color: "#7a9990", fontSize: "0.87rem", marginTop: "0.4rem" }}>
-              SEO tips, digital marketing strategies and business growth guides for Nigerian entrepreneurs.
-            </p>
-          </div>
+        SEO tips, digital marketing strategies and business growth guides for
+        Nigerian entrepreneurs.
+      </p>
+    </div>
+  </div>
+
+  <div className="blog-grid">
+    {blogPosts.map((post) => (
+      <article
+        key={post.id}
+        className="blog-card"
+        itemScope
+        itemType="https://schema.org/BlogPosting"
+      >
+        <div className="blog-img">
+          <img
+            src={post.image}
+            alt={post.title}
+            loading="lazy"
+          />
         </div>
 
-        <div className="blog-grid">
-          {blogPosts.map((post) => (
-            <article
-              key={post.id}
-              className="blog-card"
-              itemScope
-              itemType="https://schema.org/BlogPosting"
+        <div className="blog-body">
+          <div className="blog-meta">
+            <span
+              className="blog-category"
+              style={{ color: post.color }}
             >
-              <div className="blog-img" style={{ background: `linear-gradient(135deg, ${post.color}22, ${post.color}08)`, borderBottom: `1px solid ${post.color}22` }}>
-                <span className="blog-img-initials" style={{ color: post.color }}>{post.initials}</span>
-              </div>
-              <div className="blog-body">
-                <div className="blog-meta">
-                  <span className="blog-category" style={{ color: post.color }}>{post.category}</span>
-                  <span className="blog-meta-sep">·</span>
-                  <span className="blog-date"><Calendar size={11} style={{ verticalAlign: "middle", marginRight: 3 }} />{post.date}</span>
-                  <span className="blog-meta-sep">·</span>
-                  <span className="blog-readtime"><Clock size={11} style={{ verticalAlign: "middle", marginRight: 3 }} />{post.readTime}</span>
-                </div>
-                <h3 className="blog-title" itemProp="headline">{post.title}</h3>
-                <p className="blog-desc" itemProp="description">{post.desc}</p>
-                <button
-                  className="blog-read-more"
-                  onClick={() => setPage("blog")}
-                  aria-label={`Read ${post.title}`}
-                >
-                  Read Article <ArrowRight size={13} />
-                </button>
-              </div>
-            </article>
-          ))}
+              {post.category}
+            </span>
+
+            <span className="blog-meta-sep">·</span>
+
+            <span className="blog-date">
+              <Calendar
+                size={11}
+                style={{ verticalAlign: "middle", marginRight: 3 }}
+              />
+              {post.date}
+            </span>
+
+            <span className="blog-meta-sep">·</span>
+
+            <span className="blog-readtime">
+              <Clock
+                size={11}
+                style={{ verticalAlign: "middle", marginRight: 3 }}
+              />
+              {post.readTime}
+            </span>
+          </div>
+
+          <h3 className="blog-title" itemProp="headline">
+            {post.title}
+          </h3>
+
+          <p className="blog-desc" itemProp="description">
+            {post.desc}
+          </p>
+
+          <button
+            className="blog-read-more"
+            onClick={() => setPage("blog")}
+            aria-label={`Read ${post.title}`}
+          >
+            Read Article <ArrowRight size={13} />
+          </button>
         </div>
-      </section>
+      </article>
+    ))}
+  </div>
+</section>
 
       {/* ═══════════════════════════════════
            TESTIMONIALS
