@@ -1,10 +1,9 @@
-import { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import Footer from "./Footer";
 import { MUTED, ACCENT } from "../constants";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-/* ── FAQ Accordion item (controlled by parent so only one stays open) ── */
+/* ── FAQ Accordion item ── */
 function FAQItem({ q, a, isOpen, onToggle }) {
   return (
     <div className={`faq-item${isOpen ? " open" : ""}`} onClick={onToggle}>
@@ -20,41 +19,33 @@ function FAQItem({ q, a, isOpen, onToggle }) {
 const FAQS = [
   {
     q: "How long does a typical project take?",
-    a: "Most landing pages and small sites are delivered in 5–7 days. Larger web development projects typically take 2–4 weeks depending on complexity. I'll give you a clear timeline before we start.",
+    a: "Most landing pages and small sites are delivered in 5–7 days. Larger projects typically take 2–4 weeks depending on complexity.",
   },
   {
     q: "Do you work with international clients?",
-    a: "Yes — I work with clients across Nigeria, the UK, the US, Canada, and beyond. I'm comfortable with remote collaboration across time zones.",
+    a: "Yes — I work with clients across Nigeria and internationally. Remote collaboration is not an issue.",
   },
   {
     q: "What do you need from me to get started?",
-    a: "A brief description of your project, your goals, and your timeline. Design mockups help but aren't required — I can guide you through the process from scratch.",
+    a: "A short project description, goals, and timeline. I’ll guide you through the rest.",
   },
   {
     q: "How do payments work?",
-    a: "I typically work with a deposit upfront and the balance on completion. For larger projects I break it into milestones. I accept bank transfer, PayPal, and Wise for international clients.",
+    a: "Deposit upfront, balance on completion. For large projects, milestones are used.",
   },
   {
     q: "Do you offer post-launch support?",
-    a: "Yes. Every project includes free post-launch support for bug fixes. After that, I offer monthly retainer packages for ongoing maintenance and new features.",
+    a: "Yes. Free bug fixes after launch, with optional monthly maintenance.",
   },
   {
     q: "Can you work with my existing codebase?",
-    a: "Absolutely. I'm comfortable jumping into existing React, Node.js, Django/Flask, and WordPress projects. I'll review the codebase first and give you an honest assessment.",
+    a: "Absolutely. I can work with React, WordPress, and existing projects.",
   },
 ];
 
-// ─── EmailJS Credentials (USE YOUR REAL PUBLIC KEY) ────────────────
-const SERVICE_ID  = "service_81owciq";
-const TEMPLATE_ID = "template_hyx525o";
-const PUBLIC_KEY  = "GIM0M0rWD-mnRFJnv"; // ← REPLACE THIS
-// ───────────────────────────────────────────────────────────────────
-
 export default function Hire({ setPage }) {
-  const formRef = useRef(null);
   const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [openFAQ, setOpenFAQ] = useState(null); // tracks index of the currently open FAQ
+  const [openFAQ, setOpenFAQ] = useState(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -66,44 +57,39 @@ export default function Hire({ setPage }) {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!form.name || !form.email || !form.message) {
       alert("Please fill all required fields");
       return;
     }
 
-    setLoading(true);
+    // 🔴 YOUR WHATSAPP NUMBER (no +, no spaces)
+    const phoneNumber = "2349164925583";
 
-    try {
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          from_name: form.name,
-          from_email: form.email,
-          project_type: form.projectType,
-          message: form.message,
-          to_name: "Favour",
-        },
-        PUBLIC_KEY
-      );
+    const text = `
+New Project Inquiry 🚀
 
-      setSent(true);
-      setForm({
-        name: "",
-        email: "",
-        projectType: "Web Development Project",
-        message: "",
-      });
-    } catch (err) {
-      console.error("EmailJS error:", err);
-      alert(
-        "Failed to send message.\n\n" +
-        (err.text || err.message || "Unknown error")
-      );
-    } finally {
-      setLoading(false);
-    }
+Name: ${form.name}
+Email: ${form.email}
+Project Type: ${form.projectType}
+
+Message:
+${form.message}
+`;
+
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      text
+    )}`;
+
+    window.open(whatsappURL, "_blank");
+
+    setSent(true);
+    setForm({
+      name: "",
+      email: "",
+      projectType: "Web Development Project",
+      message: "",
+    });
   };
 
   return (
@@ -118,9 +104,8 @@ export default function Hire({ setPage }) {
           </h1>
 
           <p className="hero-sub" style={{ marginTop: "1rem" }}>
-            Ready to elevate your digital presence? Whether it's a custom
-            web application or a high-performance WordPress site,
-            I'm here to engineer your success.
+            Ready to elevate your digital presence? Whether it's a custom web app
+            or a high-performance website, I'm ready to help.
           </p>
 
           <div className="contact-info" style={{ marginTop: "2rem" }}>
@@ -139,30 +124,14 @@ export default function Hire({ setPage }) {
             ))}
           </div>
 
-          {/* AVAILABILITY */}
           <div className="availability-card">
             <div className="availability-dot" />
             <div>
               <div className="availability-title">Currently Available</div>
               <div className="availability-desc">
-                Open to freelance projects, remote roles, and agency collaborations.
-                Typical response time: under 24 hours.
+                Open to freelance projects and remote roles.
               </div>
             </div>
-          </div>
-
-          {/* QUICK FACTS */}
-          <div style={{ marginTop: "1.5rem" }}>
-            {[
-              { label: "Location", val: "Osun State, Nigeria · Remote Worldwide" },
-              { label: "Languages", val: "English (Fluent)" },
-              { label: "Timezone", val: "WAT (UTC+1) · Flexible" },
-            ].map((f) => (
-              <div key={f.label} className="quick-fact">
-                <span className="quick-fact-label">{f.label}</span>
-                <span className="quick-fact-val">{f.val}</span>
-              </div>
-            ))}
           </div>
         </div>
 
@@ -170,10 +139,10 @@ export default function Hire({ setPage }) {
         <div className="card" style={{ padding: "2rem" }}>
           {sent ? (
             <div style={{ textAlign: "center", padding: "3rem 0" }}>
-              <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>✦</div>
-              <h3 style={{ marginBottom: "0.5rem" }}>Message Sent!</h3>
+              <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🟢</div>
+              <h3>WhatsApp Opened!</h3>
               <p style={{ color: MUTED, fontSize: "0.85rem" }}>
-                I'll get back to you within 24 hours.
+                Please tap <b>Send</b> in WhatsApp to complete your message.
               </p>
 
               <button
@@ -233,7 +202,7 @@ export default function Hire({ setPage }) {
                   name="message"
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your vision, goals, and requirements..."
+                  placeholder="Tell me about your project..."
                 />
               </div>
 
@@ -241,9 +210,8 @@ export default function Hire({ setPage }) {
                 type="button"
                 className="submit-btn"
                 onClick={handleSubmit}
-                disabled={loading}
               >
-                {loading ? "Sending..." : "Send Project Inquiry →"}
+                Send via WhatsApp →
               </button>
             </>
           )}
@@ -253,11 +221,10 @@ export default function Hire({ setPage }) {
       {/* FAQ */}
       <div className="section">
         <div className="eyebrow">FAQ</div>
-        <h2 className="section-title">Questions clients <span>always ask.</span></h2>
-        <p style={{ color: MUTED, fontSize: "0.95rem", lineHeight: 1.7, marginBottom: "2rem", maxWidth: 560 }}>
-          Answers to the most common questions before we work together.
-          Don't see yours? Just send me a message.
-        </p>
+        <h2 className="section-title">
+          Questions clients <span>always ask.</span>
+        </h2>
+
         <div className="faq-list">
           {FAQS.map((faq, i) => (
             <FAQItem
