@@ -13,7 +13,7 @@ const plans = [
     usd:  { label: `$${toUSD(250000)} – $${toUSD(350000)}` },
     desc: "Perfect for businesses that need a professional online presence.",
     features: [
-      "Up to 10 pages",
+      "Up to 2-4 pages",
       "Mobile Responsive",
       "Contact Form",
       "WhatsApp Integration",

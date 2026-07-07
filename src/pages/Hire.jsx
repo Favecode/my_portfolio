@@ -88,7 +88,7 @@ export default function Hire({ setPage }) {
             {[
               { icon: "✆", label: "Phone", val: "+234 916 492 5583" },
               { icon: "✉", label: "Email", val: "faveecodes5@gmail.com" },
-              { icon: "𝕏", label: "X (Twitter)", val: "@myfaveguy" },
+              { icon: "𝕏", label: "X (Twitter)", val: "@favecodes_" },
             ].map((c) => (
               <div key={c.label} className="contact-item">
                 <div className="contact-icon">{c.icon}</div>
